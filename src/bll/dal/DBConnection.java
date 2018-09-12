@@ -9,8 +9,7 @@ public class DBConnection {
     private static DBConnection instance = new DBConnection();
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-//    private static final String URL = "dbc:mysql://localhost/venue?user=minty&password=greatsqldb";
-    private static final String URL = "jdbc:mysql://localhost:3306/venue?user=root&password=r00t";
+    private static final String URL = "jdbc:mysql://localhost:3306/venue?user=root&password=";
 
     private Connection connection;
     private Statement statement;
