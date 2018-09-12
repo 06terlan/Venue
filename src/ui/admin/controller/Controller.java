@@ -21,6 +21,6 @@ public class Controller {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/ui/admin/fxml/admin_booking.fxml"));
         primaryStage.setTitle("Main");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root));
 	}
 }
