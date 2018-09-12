@@ -8,9 +8,8 @@ public class DBConnection {
 
     private static DBConnection instance = new DBConnection();
 
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-//    private static final String URL = "dbc:mysql://localhost/venue?user=minty&password=greatsqldb";
-    private static final String URL = "jdbc:mysql://localhost:3306/venue?user=root&password=r00t";
+    private static final String DRIVER = DB.DRIVER;
+    private static final String URL = DB.URL;
 
     private Connection connection;
     private Statement statement;
@@ -38,9 +37,9 @@ public class DBConnection {
         connection = DriverManager.getConnection(URL);
     }
 
-    public void update(String sqlQuery) throws SQLException {
+    public int update(String sqlQuery) throws SQLException {
         statement = connection.createStatement();
-        statement.executeUpdate(sqlQuery);
+        return statement.executeUpdate(sqlQuery,Statement.RETURN_GENERATED_KEYS);
     }
 
     public ResultSet executeQuery(String sqlQuery) throws SQLException {
