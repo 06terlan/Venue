@@ -1,6 +1,5 @@
 package bll.dal;
 
-import com.sun.rowset.CachedRowSetImpl;
 
 import java.sql.*;
 
@@ -8,9 +7,9 @@ public class DBConnection {
 
     private static DBConnection instance = new DBConnection();
 
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DRIVER = DB.DRIVER;
 //    private static final String URL = "dbc:mysql://localhost/venue?user=minty&password=greatsqldb";
-    private static final String URL = "jdbc:mysql://localhost:3306/venue?user=root&password=r00t";
+    private static final String URL = DB.URL;
 
     private Connection connection;
     private Statement statement;
@@ -34,8 +33,8 @@ public class DBConnection {
     }
 
     private void connect() throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
-        Class.forName(DRIVER).newInstance();
-        connection = DriverManager.getConnection(URL);
+    	Class.forName(DB.DRIVER).newInstance();
+        connection = DriverManager.getConnection(DB.URL);
     }
 
     public void update(String sqlQuery) throws SQLException {
