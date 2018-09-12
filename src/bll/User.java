@@ -9,8 +9,8 @@ public abstract class User {
 	private String Password;	
 	
 	public User(String firstName, String lastName, String phoneNo, String userName, String password,
-			String street, String city, String state, String zip) {
-		Address address = new Address(street,city,state,zip);
+			String street, String city, String state, int zip) {
+		Address address = new Address(zip,city,street,state);
 		this.FirstName = firstName;
 		LastName = lastName;
 		PhoneNo = phoneNo;

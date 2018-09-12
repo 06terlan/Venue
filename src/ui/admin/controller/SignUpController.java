@@ -29,7 +29,7 @@ public class SignUpController {
     	//to-do list Validation
     	
     	NormalCustomer nCustomer = new NormalCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
-    			street.getText(), city.getText(), state.getText(), zip.getText(), "Customer", "Normal");
+    			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "Normal");
     	
     	String sql = "select * from addresses";
     	DBConnection connection = DBConnection.getInstance();
