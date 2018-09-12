@@ -1,6 +1,5 @@
 package bll.dal;
 
-import com.sun.rowset.CachedRowSetImpl;
 
 import java.sql.*;
 
@@ -33,8 +32,8 @@ public class DBConnection {
     }
 
     private void connect() throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
-        Class.forName(DRIVER).newInstance();
-        connection = DriverManager.getConnection(URL);
+    	Class.forName(DB.DRIVER).newInstance();
+        connection = DriverManager.getConnection(DB.URL);
     }
 
     public int update(String sqlQuery) throws SQLException {
