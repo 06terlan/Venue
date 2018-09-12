@@ -8,7 +8,6 @@ public class DBConnection {
     private static DBConnection instance = new DBConnection();
 
     private static final String DRIVER = DB.DRIVER;
-//    private static final String URL = "dbc:mysql://localhost/venue?user=minty&password=greatsqldb";
     private static final String URL = DB.URL;
 
     private Connection connection;
@@ -37,9 +36,9 @@ public class DBConnection {
         connection = DriverManager.getConnection(DB.URL);
     }
 
-    public void update(String sqlQuery) throws SQLException {
+    public int update(String sqlQuery) throws SQLException {
         statement = connection.createStatement();
-        statement.executeUpdate(sqlQuery);
+        return statement.executeUpdate(sqlQuery,Statement.RETURN_GENERATED_KEYS);
     }
 
     public ResultSet executeQuery(String sqlQuery) throws SQLException {
