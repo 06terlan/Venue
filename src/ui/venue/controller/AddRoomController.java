@@ -1,6 +1,9 @@
 package ui.venue.controller;
 
 import bll.Room;
+import bll.Rule.RuleException;
+import bll.Rule.RuleFactory;
+import bll.model.Building;
 import bll.service.VenueService;
 import factory.RoomType;
 import javafx.beans.value.ChangeListener;
@@ -73,12 +76,23 @@ public class AddRoomController implements Initializable {
 
     @FXML
     private void addNewRoom(ActionEvent event) throws Exception {
+        validateFields();
         String roomNumber = roomNumberTextField.getText().trim();
         double price = Double.parseDouble(priceTextField.getText().trim());
         this.venueService.addRoom(buildingId,roomNumber,roomType,price);
         Stage stage = (Stage) btnAddNewRoom.getScene().getWindow();
         changeScene("/ui/venue/fxml/rooms.fxml",stage);
     }
+
+    private void validateFields() {
+        try {
+            Building building = new Building(roomNumberTextField.getText());
+            RuleFactory.getRule(AddRoomController.class).validate(building);
+        } catch (RuleException e) {
+
+        }
+    }
+
     @FXML
     private void editRoom(ActionEvent event) throws Exception {
         String roomNumber = roomNumberTextField.getText().trim();

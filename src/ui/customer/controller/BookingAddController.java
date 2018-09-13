@@ -38,7 +38,7 @@ public class BookingAddController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		getRooms();
+//		getRooms();
 				
 		//initEvents();
 	}
