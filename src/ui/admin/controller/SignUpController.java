@@ -51,33 +51,35 @@ public class SignUpController {
     	 boolean fname = textFieldNotEmpty(firstName, firstNameLabel, "First Name is required!");
     	 boolean lname = textFieldNotEmpty(lastName, lastNameLabel, "Last Name is required!");
     	 boolean phone = textFieldNotEmpty(phoneNo, phoneLabel, "Phone No. is required!");
-    	 boolean Addrstreet = textAreaNotEmpty(street, stateLabel, "Street is required!");
+    	 boolean Addrstreet = textAreaNotEmpty(street, streetLabel, "Street is required!");
     	 boolean addrCity = textFieldNotEmpty(city, cityLabel, "City is required!");
-    	 boolean addrState = textFieldNotEmpty(city, cityLabel, "State is required!");
+    	 boolean addrState = textFieldNotEmpty(state, stateLabel, "State is required!");
     	 boolean addrZip = textFieldNotEmpty(zip,zipLabel, "Zip is required!");
     	 boolean uName = textFieldNotEmpty(userName,UserNameLabel, "User Name is required!");
     	 boolean pass = textFieldNotEmpty(password,passwordLabel, "Password is required!");
     	 boolean cPass = textFieldNotEmpty(confirmPassword,confirmPasswordLabel, "Confirm Password is required!");
-         
+    	
     	 if(fname && lname && phone && Addrstreet && addrState && addrCity && addrZip && uName && pass && cPass)
     	 { 
-    	
+    		 
     	 boolean isInteger = zip.getText().matches("[0-9]+");
     	 if(isInteger) {
     		 
     		    if(password.getText().equals(confirmPassword.getText()))
     		    {
+    		    	
 			    	//Check for existing user
 			    	if(isExistingUser())
 			    	{
+			    		
 			    	   setErrorMessage(existingUserLabel, "The username already exists. Please use a different username.");	
 			    	}
 			    	else
-			    	{    	
-			    	String customerType = "Normal";
+			    	{    				    	
 			    	User customer = null;
 			    	if(isPrime.isSelected())
 			    	{
+			    		
 			    		 customer = new NormalCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
 			        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "Prime");
 			        	    		  
@@ -91,7 +93,10 @@ public class SignUpController {
 			    	
 			    	 UserService userService = new UserService();   	 
 			    	  userService.addCustomer(customer);
-			    	}
+			    	  System.out.println("Need to redirect to Booking page");
+ 		    	}
+			    	
+			    	
     		    }
     		    else
     		    {

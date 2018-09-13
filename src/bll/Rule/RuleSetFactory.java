@@ -2,14 +2,17 @@ package bll.Rule;
 
 import java.util.HashMap;
 
+import javafx.application.Application;
 import javafx.scene.Node;
+import main.SignUp;
+import ui.admin.controller.SignUpController;
 
 
 final public class RuleSetFactory {
 	private RuleSetFactory(){}
-	static HashMap<Class<? extends Node>, RuleSet> map = new HashMap<>();
+	static HashMap<Class<? extends Application>, RuleSet> map = new HashMap<>();
 	static {
-		//map.put(SignUp.class, new SignUpRuleSet());
+		 //map.put( SignUp.class, new SignUpRuleSet());
 		//map.put(BookWindow.class, new BookRuleSet());
 	}
 	public static RuleSet getRuleSet(Node c) {

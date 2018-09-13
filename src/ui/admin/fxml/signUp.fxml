@@ -82,7 +82,7 @@
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Sign Up" textAlignment="CENTER" GridPane.columnSpan="2" />
       <Label text="Apply as Prime Customer" GridPane.rowIndex="12" />
-      <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <CheckBox fx:id="isPrime" GridPane.columnIndex="1" GridPane.rowIndex="12" />
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <children>
             <Label fx:id="existingUserLabel" textFill="RED"/>

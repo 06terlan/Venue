@@ -1,16 +1,23 @@
 package ui.admin.controller;
 
+import java.io.IOException;
+
 import bll.Customer;
 import bll.User;
 import bll.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UserLoginController {
     @FXML private TextField userName;
@@ -18,6 +25,7 @@ public class UserLoginController {
     @FXML private Label UserNameLabel;
     @FXML private Label passwordLabel;
     @FXML private Label incorrextUserandPassLabel;
+    @FXML private Button btnSignup;
     
     @FXML protected void handleLoginAction(ActionEvent event) {
     	
@@ -37,6 +45,21 @@ public class UserLoginController {
 	    	 }
     	 }
       
+    }
+    @FXML protected void handleSignUpAction(ActionEvent event) { 
+    	
+    	Stage primaryStage = (Stage) btnSignup.getScene().getWindow();
+		
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/ui/admin/fxml/signUp.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        primaryStage.setTitle("Sign Up");
+        primaryStage.setScene(new Scene(root, 600, 575));
+        primaryStage.show();
     }
     public static boolean textFieldNotEmpty(TextField i)
     {
