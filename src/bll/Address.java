@@ -60,11 +60,15 @@ public class Address {
     }
 
     public int add() throws Exception {
-        String sqlQuery = "insert into addresses(zip,street,city,state) " +
-                "values(" + zip + ",\"" + street + "\",\"" + city + "\",\"" + state + "\")";
-        System.out.println(sqlQuery);
+        String sqlQuery = "select * from addresses where zip="+zip;
         DBConnection connection = DBConnection.getInstance();
-        return connection.update(sqlQuery);
+        Address address = resultSetToAddress(connection.executeQuery(sqlQuery));
+        if(address == null) {
+            sqlQuery = "insert into addresses(zip,street,city,state) " +
+                    "values(" + zip + ",\"" + street + "\",\"" + city + "\",\"" + state + "\")";
+            return connection.update(sqlQuery);
+        }
+        return address.zip;
     }
 
     public Address findByZip(int zip) throws SQLException {
