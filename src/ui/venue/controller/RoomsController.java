@@ -46,9 +46,11 @@ public class RoomsController implements Initializable {
             // TODO display error dialog
         }
         createBuildingItemInterface();
+        buildingsListView.getSelectionModel().select(0);
         buildingsListView.setOnMouseClicked(e -> {
             listAllBuildingRooms();
         });
+        listAllBuildingRooms();
     }
 
     private void createBuildingItemInterface() {
@@ -85,7 +87,7 @@ public class RoomsController implements Initializable {
 
     private GridPane createBuildingEditButtonGridPane(int index,String editResourceLocation,boolean isRoom) {
         Button btnEdit = createEditButton(index,editResourceLocation,isRoom);
-        Button btnRemove = createRemoveButton(index);
+        Button btnRemove = createRemoveButton(index,isRoom);
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.add(btnEdit,0,0);
@@ -93,11 +95,11 @@ public class RoomsController implements Initializable {
         return gridPane;
     }
 
-    private Button createRemoveButton(int index) {
+    private Button createRemoveButton(int index,boolean isRoom) {
         Button btnRemove = new Button("remove");
         btnRemove.setOnAction(e -> {
             try {
-                removeBuilding(index);
+                removeBuilding(index,isRoom);
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (Exception e1) {
@@ -131,10 +133,18 @@ public class RoomsController implements Initializable {
 
     private void loadRooms(int buildingId) {
         try {
+            buildingId = getSelectedBuildingId(buildingId);
             rooms.addAll(venueService.getAllRooms(buildingId));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getSelectedBuildingId(int buildingId) {
+        if(buildingId < 0 && buildings.size() > 0) {
+            return 0;
+        }
+        return buildingId;
     }
 
     private Building getSelectedBuilding() {
@@ -145,12 +155,21 @@ public class RoomsController implements Initializable {
         return buildings.get(selectedIndex);
     }
 
-    private void removeBuilding(int index) throws Exception {
-        venueService.removeBuilding(buildings.get(index).getId());
-        buildingsListView.getItems().clear();
-        buildings.clear();
-        loadData();
-        createBuildingItemInterface();
+    private void removeBuilding(int index,boolean isRoom) throws Exception {
+        if(!isRoom) {
+            venueService.removeBuilding(buildings.get(index).getId());
+            buildingsListView.getItems().clear();
+            buildings.clear();
+            loadData();
+            createBuildingItemInterface();
+        }else {
+            Room room = rooms.get(index);
+            venueService.removeRoom(room.getRoomId(),room.getRoomType());
+            roomsListView.getItems().clear();
+            rooms.clear();
+            loadRooms(buildings.get(index).getId());
+            createRoomItemInterface();
+        }
     }
 
     private Button createEditButton(int index,String editResourceLocation,boolean isRoom) {
@@ -234,4 +253,5 @@ public class RoomsController implements Initializable {
     private void loadData() throws Exception {
         buildings.addAll(venueService.getAllBuildings());
     }
+
 }

@@ -99,8 +99,8 @@ public class Booking {
 		if(bookingId > 0) {
 			sqlQuery = "Update bookings set userId='"+userId+"',roomId='"+roomId+"',status='"+status+"',startTime='"+startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))+"',endTime='"+endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))+"' WHERE bookId='"+bookingId+"'";
 		}
-			sqlQuery = "insert into bookings(userId,roomId,startTime,endTime,status) values(\"" + userId + "\",\"" + roomId + "\",\"" + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",\"" + endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",'"+status+"')";
 		else {
+			sqlQuery = "insert into bookings(userId,roomId,startTime,endTime,status) values(\"" + userId + "\",\"" + roomId + "\",\"" + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",\"" + endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",'"+status+"')";
 		}
                 
         System.out.println(sqlQuery);

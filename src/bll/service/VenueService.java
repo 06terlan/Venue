@@ -73,4 +73,14 @@ public class VenueService {
             throw new Exception("Error while updating room.");
         }
     }
+
+    public void removeRoom(int roomId,RoomType roomType) throws Exception {
+        Room room = RoomFactory.getRoom(roomType);
+        try {
+            room.remove(roomId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error: Cannot remove the specified room.");
+        }
+    }
 }

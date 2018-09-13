@@ -13,7 +13,10 @@ public class ConferenceRoom extends Room{
     }
 
     public ConferenceRoom(int roomId, String roomNumber, double price) {
-        super(roomId,roomNumber,price);
+        super(roomId,roomNumber,price,RoomType.CONFERENCE);
+    }
+
+    public ConferenceRoom() {
     }
 
     @Override
