@@ -4,6 +4,8 @@ package ui.admin.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bll.Rule.RuleException;
+import bll.Rule.RuleFactory;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
 
 import bll.Customer;
@@ -46,18 +48,24 @@ public class SignUpController {
     @FXML private Label confirmPasswordLabel;
     
     @FXML protected void handleSignUpAction(ActionEvent event) throws SQLException {
-    	
-    	//to-do list Validation
-    	 boolean fname = textFieldNotEmpty(firstName, firstNameLabel, "First Name is required!");
-    	 boolean lname = textFieldNotEmpty(lastName, lastNameLabel, "Last Name is required!");
-    	 boolean phone = textFieldNotEmpty(phoneNo, phoneLabel, "Phone No. is required!");
-    	 boolean Addrstreet = textAreaNotEmpty(street, streetLabel, "Street is required!");
-    	 boolean addrCity = textFieldNotEmpty(city, cityLabel, "City is required!");
-    	 boolean addrState = textFieldNotEmpty(state, stateLabel, "State is required!");
-    	 boolean addrZip = textFieldNotEmpty(zip,zipLabel, "Zip is required!");
-    	 boolean uName = textFieldNotEmpty(userName,UserNameLabel, "User Name is required!");
-    	 boolean pass = textFieldNotEmpty(password,passwordLabel, "Password is required!");
-    	 boolean cPass = textFieldNotEmpty(confirmPassword,confirmPasswordLabel, "Confirm Password is required!");
+
+		bll.model.User user = new bll.model.User(firstName.getText(),lastName.getText(),phoneNo.getText(),userName.getText(),password.getText());
+		try {
+			RuleFactory.getRule(SignUpController.class).validate(user);
+		} catch (RuleException e) {
+			System.out.println(e.getMessage());
+		}
+		//to-do list Validation
+		boolean fname = textFieldNotEmpty(firstName, firstNameLabel, "First Name is required!");
+		boolean lname = textFieldNotEmpty(lastName, lastNameLabel, "Last Name is required!");
+		boolean phone = textFieldNotEmpty(phoneNo, phoneLabel, "Phone No. is required!");
+		boolean Addrstreet = textAreaNotEmpty(street, streetLabel, "Street is required!");
+		boolean addrCity = textFieldNotEmpty(city, cityLabel, "City is required!");
+		boolean addrState = textFieldNotEmpty(state, stateLabel, "State is required!");
+		boolean addrZip = textFieldNotEmpty(zip,zipLabel, "Zip is required!");
+		boolean uName = textFieldNotEmpty(userName,UserNameLabel, "User Name is required!");
+		boolean pass = textFieldNotEmpty(password,passwordLabel, "Password is required!");
+		boolean cPass = textFieldNotEmpty(confirmPassword,confirmPasswordLabel, "Confirm Password is required!");
     	
     	 if(fname && lname && phone && Addrstreet && addrState && addrCity && addrZip && uName && pass && cPass)
     	 { 
