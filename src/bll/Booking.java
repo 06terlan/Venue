@@ -67,17 +67,17 @@ public class Booking {
 		return "101";
 	}
 	
-	public User getRoom() throws SQLException {
+	public Room getRoom() throws SQLException {
 		if(room == null) {
 			DBConnection db = DBConnection.getInstance();
 			ResultSet rs = db.executeQuery("SELECT * FROM rooms WHERE roomId='"+this.roomId+"'");
 			while(rs.next()) {
-				//if(rs.getString("customerType")=="normal") customer = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
+				if(rs.getString("roomType")=="concert") room = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
 				//else customer = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
 			}
 		}
 		
-		return customer;
+		return room;
 	}
 	
 	public User getCustomer() throws SQLException {
