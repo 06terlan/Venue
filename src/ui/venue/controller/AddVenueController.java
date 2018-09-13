@@ -1,5 +1,6 @@
 package ui.venue.controller;
 
+import bll.Building;
 import bll.service.VenueService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,8 +26,10 @@ public class AddVenueController implements Initializable {
     @FXML private TextField streetTextField;
     @FXML private TextField zipCodeTextField;
     @FXML private Button btnAdd;
+    @FXML private Button btnEdit;
     @FXML private Button btnCancel;
 
+    private Building building;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,13 +46,24 @@ public class AddVenueController implements Initializable {
         int zipCode = Integer.parseInt(zipCodeTextField.getText().trim());
         this.venueService.addBuilding(buildingNumber,roomNumber,city,state,street,zipCode);
         Stage stage = (Stage) btnAdd.getScene().getWindow();
-        changeScene("/ui/venue/fxml/venue.fxml",stage);
+        changeScene("/ui/venue/fxml/rooms.fxml",stage);
+    }
+
+    @FXML
+    private void editBuilding(ActionEvent event) throws IOException {
+        String buildingNumber = buildingNumberTextField.getText().trim();
+        try {
+            this.venueService.editBuilding(building.getId(),buildingNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        changeScene("/ui/venue/fxml/rooms.fxml",(Stage) btnEdit.getScene().getWindow());
     }
 
     @FXML
     private void cancel(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
-        changeScene("/ui/venue/fxml/venue.fxml",stage);
+        changeScene("/ui/venue/fxml/rooms.fxml",stage);
     }
 
     private void changeScene(String fxmlLocation,Stage stage) throws IOException {
@@ -58,4 +72,39 @@ public class AddVenueController implements Initializable {
         stage.setScene(scene);
     }
 
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public TextField getZipCodeTextField() {
+        return zipCodeTextField;
+    }
+
+    public TextField getStreetTextField() {
+        return streetTextField;
+    }
+
+    public TextField getStateTextField() {
+        return stateTextField;
+    }
+
+    public TextField getCityTextField() {
+        return cityTextField;
+    }
+
+    public TextField getBuildingNumberTextField() {
+        return buildingNumberTextField;
+    }
+
+    public Button getBtnAdd() {
+        return btnAdd;
+    }
+
+    public Button getBtnEdit() {
+        return btnEdit;
+    }
 }
