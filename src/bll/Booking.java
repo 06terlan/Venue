@@ -32,6 +32,6 @@ public class Booking {
 	}
 	
 	public User getCustomer() {
-		
+		return null;
 	}
 }
