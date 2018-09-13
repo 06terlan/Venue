@@ -14,10 +14,12 @@ public class Customer extends Application {
         @Override
         public void start(Stage primaryStage) throws Exception{
         	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
-        	Parent root = (Parent)fxmlLoader.load(); 
             
-        	BookingController controller = fxmlLoader.<BookingController>getController();
+        	BookingController controller = new BookingController();
         	controller.setCustomerId(custId);
+        	fxmlLoader.setController(controller);
+        	
+        	Parent root = (Parent)fxmlLoader.load(); 
         	
             primaryStage.setTitle("Main");
             primaryStage.setScene(new Scene(root));
