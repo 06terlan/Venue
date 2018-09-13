@@ -37,10 +37,15 @@ public abstract class Room {
         this.building = building;
     }
 
-    public Room(int roomId, String roomNumber, double price) {
+    public Room(int roomId, String roomNumber, double price,RoomType roomType) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.price = price;
+        this.roomType = roomType;
+    }
+
+    public Room() {
+
     }
 
     public String getRoomNumber() {
@@ -115,8 +120,14 @@ public abstract class Room {
 
     public void update() throws SQLException {
         String updateQuery = "update rooms set roomNo=\"" + roomNumber + "\"," +
-                "price=" + price + " where roomId=" + roomId;
+                "price=" + price + ",roomType=" + roomType.getValue() + " where roomId=" + roomId;
         DBConnection connection = DBConnection.getInstance();
         connection.update(updateQuery);
+    }
+
+    public void remove(int roomId) throws SQLException {
+        String sqlQuery = "delete from rooms where roomId=" + roomId;
+        DBConnection connection = DBConnection.getInstance();
+        connection.update(sqlQuery);
     }
 }

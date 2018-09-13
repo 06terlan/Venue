@@ -17,7 +17,11 @@ public class MeetingRoom extends Room {
     }
 
     public MeetingRoom(int roomId, String roomNumber, double price) {
-        super(roomId,roomNumber,price);
+        super(roomId,roomNumber,price,RoomType.MEETING);
+    }
+
+    public MeetingRoom() {
+
     }
 
 

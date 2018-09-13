@@ -84,6 +84,8 @@ public class AddRoomController implements Initializable {
         String roomNumber = roomNumberTextField.getText().trim();
         double price =  Double.parseDouble(priceTextField.getText().trim());
         this.venueService.editRoom(room.getRoomId(),roomNumber,price,roomType);
+        Stage stage = (Stage) btnEditRoom.getScene().getWindow();
+        changeScene("/ui/venue/fxml/rooms.fxml",stage);
     }
 
     private void changeScene(String fxmlLocation,Stage stage) throws IOException {

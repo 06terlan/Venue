@@ -13,7 +13,10 @@ public class HallRoom extends Room {
     }
 
     public HallRoom(int roomId, String roomNumber, double price) {
-        super(roomId,roomNumber,price);
+        super(roomId,roomNumber,price,RoomType.HALL);
+    }
+
+    public HallRoom() {
     }
 
     @Override

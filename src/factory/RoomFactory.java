@@ -39,4 +39,16 @@ public class RoomFactory {
         }
         return null;
     }
+
+    public static Room getRoom(RoomType roomType) {
+        switch (roomType) {
+            case MEETING:
+                return new MeetingRoom();
+            case CONFERENCE:
+                return new ConferenceRoom();
+            case HALL:
+                return new HallRoom();
+        }
+        return null;
+    }
 }
