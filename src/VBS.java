@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,10 +5,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class UserLogin extends Application{
+public class VBS extends Application{
 
     public static void main(String[] args) {
-        Application.launch(UserLogin.class, args);
+        Application.launch(VBS.class, args);
     }
     
     @Override

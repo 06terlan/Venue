@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 
 public class SignUp extends Application {
 
-	 public static void main(String[] args) {
-	        Application.launch(SignUp.class, args);
-	    }
+//	 public static void main(String[] args) {
+//	        Application.launch(SignUp.class, args);
+//	    }
 	    
 	    @Override
 	    public void start(Stage stage) throws Exception {
