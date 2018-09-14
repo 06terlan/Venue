@@ -6,7 +6,7 @@ public class Admin extends User {
 	
 	public Admin(String firstName, String lastName, String phoneNo, String userName, String password, String street,
 			String city, String state, int zip, String userType) {
-		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip);
+		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip,userType);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setPhoneNo(phoneNo);
