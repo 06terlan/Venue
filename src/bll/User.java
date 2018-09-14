@@ -20,18 +20,19 @@ public abstract class User {
 	}
 
 	public User(String firstName, String lastName, String phoneNo, String userName, String password,
-			String street, String city, String state, int zip) {
+			String street, String city, String state, int zip, String uType) {
 		Address address = new Address(zip,city,street,state);
 		this.FirstName = firstName;
 		LastName = lastName;
 		PhoneNo = phoneNo;
 		Address = address;
 		UserName = userName;
-		Password = password;		
+		Password = password;	
+		userType = uType;
 	}
 	
 	public User(String firstName, String lastName, String phoneNo, String userName, String password,
-			String street, String city, String state, int zip, int userId) {
+			String street, String city, String state, int zip, int userId , String uType) {
 		Address address = new Address(zip,city,street,state);
 		this.FirstName = firstName;
 		LastName = lastName;
@@ -39,6 +40,7 @@ public abstract class User {
 		Address = address;
 		UserName = userName;
 		Password = password;
+		userType = uType;
 		this.userId = userId;
 	}
 
@@ -112,7 +114,7 @@ public abstract class User {
 		Address addr = null;
 
 		while (resultSet.next()) {
-			if (resultSet.getString("type").equals("Admin")) {
+			if (resultSet.getString("type").equals("admin")) {
 				user = new Admin();
 				addr = new Address();
 				user.setUserId(resultSet.getInt("userId"));
@@ -128,7 +130,7 @@ public abstract class User {
 				user.setAddress(addr);
 
 			} else {
-				if (resultSet.getString("customerType").equals("Prime")) {
+				if (resultSet.getString("customerType").equals("prime")) {
 					user = new PrimeCustomer();
 					addr = new Address();
 					user.setUserId(resultSet.getInt("userId"));

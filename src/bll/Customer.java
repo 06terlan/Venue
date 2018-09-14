@@ -28,7 +28,7 @@ public class Customer extends User {
 
 	public Customer(String firstName, String lastName, String phoneNo, String userName, String password, String street,
 			String city, String state, int zip, String userType,String CustomerType) {
-		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip);
+		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip,userType);
 		
 		Address addr = new Address(zip, city, street, state);		
 		this.setAddress(addr);
@@ -39,7 +39,7 @@ public class Customer extends User {
 	
 	public Customer(String firstName, String lastName, String phoneNo, String userName, String password, String street,
 			String city, String state, int zip, String userType, int userId) {
-		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userId);
+		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userId,userType);
 		UserType = userType;
 	}
 	

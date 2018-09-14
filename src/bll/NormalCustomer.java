@@ -11,7 +11,7 @@ public class NormalCustomer extends Customer {
 	public NormalCustomer(String firstName, String lastName, String phoneNo, String userName, String password,
 			String street, String city, String state, int zip, String userType, String customerType) {
 
-		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userType, zip);
+		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userType,zip);
 		CustomerType = customerType;
 	}
 	
@@ -36,7 +36,7 @@ public class NormalCustomer extends Customer {
 	@Override
     public int add() throws Exception {
         String sqlQuery = "insert into users(firstname,surname,type,username,password,phone,zip,customerType) " +
-                "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"" + this.getUserType() + "\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\",\"" + this.getCustomerType() + "\")";
+                "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"customer\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\",\"" + this.getCustomerType() + "\")";
         System.out.println(sqlQuery);
         DBConnection connection = DBConnection.getInstance();
         return connection.update(sqlQuery);
