@@ -9,7 +9,7 @@ import ui.customer.controller.BookingController;
 
 public class Customer extends Application {
 
-		private int custId = 1;
+		private int custId = 4;
 	
         @Override
         public void start(Stage primaryStage) throws Exception{

@@ -2,6 +2,7 @@ package bll;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import bll.dal.DBConnection;
 
@@ -40,5 +41,12 @@ public class NormalCustomer extends Customer {
         System.out.println(sqlQuery);
         DBConnection connection = DBConnection.getInstance();
         return connection.update(sqlQuery);
-    }	
+    }
+	
+	@Override
+	public void addBooking(int roomId, LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
+		Booking booking = new Booking(0, roomId, getUserId(), startTime, endTime, 0);
+		booking.save();
+		if(bookings != null) bookings.add(booking);
+	}
 }

@@ -1,5 +1,8 @@
 package bll;
 
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+
 import bll.dal.DBConnection;
 
 public class PrimeCustomer extends Customer{
@@ -39,5 +42,11 @@ public class PrimeCustomer extends Customer{
          System.out.println(id);
          return id;
     }	
-
+	
+	@Override
+	public void addBooking(int roomId, LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
+		Booking booking = new Booking(0, roomId, getUserId(), startTime, endTime, 1);
+		booking.save();
+		if(bookings != null) bookings.add(booking);
+	}
 }
