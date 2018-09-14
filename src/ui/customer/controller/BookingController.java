@@ -215,7 +215,10 @@ public class BookingController implements Initializable{
 			DBConnection db = DBConnection.getInstance();
 			ResultSet rs = db.executeQuery("SELECT * FROM users LEFT JOIN addresses ON addresses.zip=users.zip WHERE userId='"+this.customerId+"'");
 			while(rs.next()) {
-				CustomerType custType = CustomerFactory.getCustomerType(rs.getString("customerType"));
+				String c = rs.getString("customerType");
+				System.out.println("============================");
+				System.out.println(c);
+				CustomerType custType = CustomerFactory.getCustomerType(c);
 				customer = CustomerFactory.createCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"), customerId, custType);
 			}
 		}

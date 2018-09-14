@@ -165,7 +165,7 @@ public class BookingAddController extends JFrame implements Initializable{
 	
 	private void getRooms() throws SQLException {
 		DBConnection db = DBConnection.getInstance();
-		ResultSet rs = db.executeQuery("SELECT * FROM rooms LEFT JOIN buildings ON buildings.buildingId=rooms.buildingId");
+		ResultSet rs = db.executeQuery("SELECT * FROM rooms LEFT JOIN buildings ON buildings.buldingId=rooms.buildingId");
 		while(rs.next()) {
 			RoomType type = RoomType.values()[rs.getInt("roomType")];
 			Room rm = RoomFactory.createRoom(rs.getInt("roomId"), rs.getString("roomNo"), rs.getDouble("price"), type);

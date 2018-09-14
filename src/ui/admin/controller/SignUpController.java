@@ -1,6 +1,7 @@
 package ui.admin.controller;
 
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,11 +18,16 @@ import bll.service.UserService;
 import bll.service.VenueService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ui.customer.controller.BookingController;
 
 public class SignUpController {
     @FXML private TextField firstName;
@@ -61,19 +67,39 @@ public class SignUpController {
 		    	{
 		    		
 		    		 customer = new PrimeCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
-		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "prime");
+		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "customer", "prime");
 		        	    		  
 		    	}
 		    	else
 		    	{
 		    		 customer = new NormalCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
-		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "normal");
+		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "customer", "normal");
 		        	      		
 		    	}    	
 		    	
 		    	 UserService userService = new UserService();   	 
-		    	  userService.addCustomer(customer);
-		    	  System.out.println("Need to redirect to Booking page");
+		    	  int custId = userService.addCustomer(customer);
+		    	  //System.out.println("Need to redirect to Booking page");
+					 Stage primaryStage = (Stage) isPrime.getScene().getWindow();
+	    				
+	    				//Parent root = null;
+	    				try {
+	    					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
+	    					BookingController controller = new BookingController();
+	    					controller.setCustomerId(custId);
+	    					
+	    					fxmlLoader.setController(controller);
+	    					
+	    					Parent root = (Parent) fxmlLoader.load();
+	    					
+	    					primaryStage.setTitle("Admin");
+		    		        primaryStage.setScene(new Scene(root, 600, 575));
+		    		        primaryStage.show(); 
+	    				} catch (IOException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
+	    		        
 	    	}
 	    	//end
 			

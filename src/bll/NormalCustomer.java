@@ -12,13 +12,13 @@ public class NormalCustomer extends Customer {
 			String street, String city, String state, int zip, String userType, String customerType) {
 
 		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userType, zip);
-		//CustomerType = customerType;
+		CustomerType = customerType;
 	}
 	
 	public NormalCustomer(String firstName, String lastName, String phoneNo, String userName, String password,
 			String street, String city, String state, int zip, String userType, String customerType, int userId) {
 		super(firstName, lastName, phoneNo, userName, password, street, city, state, zip, userType, userId);
-		//CustomerType = customerType;
+		CustomerType = customerType;
 	}
 
     public NormalCustomer() {
