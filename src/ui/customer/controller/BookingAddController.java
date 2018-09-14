@@ -132,6 +132,18 @@ public class BookingAddController extends JFrame implements Initializable{
 					return;
 				}
 				
+				String sqlQuery = "SELECT * FROM bookings WHERE roomId='"+room.getRoomId()+"' AND '"+(startDate+" "+startTime)+"' < endTime and '"+(endDate+" "+endTime)+"' > startTime";
+				DBConnection connection = DBConnection.getInstance();
+				try {
+					ResultSet rs = connection.executeQuery(sqlQuery);
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(BookingAddController.this, "The room already booked at that time!");
+						return;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
 				status = true;
 				win.close();
 			}
@@ -154,7 +166,7 @@ public class BookingAddController extends JFrame implements Initializable{
 		return endTime;
 	}
 	public LocalDateTime getStartDateTime() {
-		return LocalDateTime.parse(startDate + " " + endTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+		return LocalDateTime.parse(startDate + " " + startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 	public LocalDateTime getEndDateTime() {
 		return LocalDateTime.parse(endDate + " " + endTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -165,7 +177,7 @@ public class BookingAddController extends JFrame implements Initializable{
 	
 	private void getRooms() throws SQLException {
 		DBConnection db = DBConnection.getInstance();
-		ResultSet rs = db.executeQuery("SELECT * FROM rooms LEFT JOIN buildings ON buildings.buldingId=rooms.buildingId");
+		ResultSet rs = db.executeQuery("SELECT * FROM rooms LEFT JOIN buildings ON buildings.buildingId=rooms.buildingId");
 		while(rs.next()) {
 			RoomType type = RoomType.values()[rs.getInt("roomType")];
 			Room rm = RoomFactory.createRoom(rs.getInt("roomId"), rs.getString("roomNo"), rs.getDouble("price"), type);

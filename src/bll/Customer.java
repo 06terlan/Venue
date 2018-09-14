@@ -4,14 +4,15 @@ package bll;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import bll.dal.DBConnection;
 
-public class Customer extends User {
+public abstract class Customer extends User {
 	private String UserType;
-	private List<Booking> bookings = null;
+	protected List<Booking> bookings = null;
 	protected String CustomerType;
 
     public Customer() {
@@ -43,11 +44,7 @@ public class Customer extends User {
 		UserType = userType;
 	}
 	
-	public void addBooking(int roomId, LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
-		Booking booking = new Booking(0, roomId, getUserId(), startTime, endTime, 0);
-		booking.save();
-		if(bookings != null) bookings.add(booking);
-	}
+	public abstract void addBooking(int roomId, LocalDateTime startTime, LocalDateTime endTime) throws SQLException;
 	
 	public List<Booking> getBookings() throws SQLException{
 		
@@ -57,7 +54,7 @@ public class Customer extends User {
 			
 			ResultSet rs = db.executeQuery("SELECT * FROM bookings WHERE userId = '"+getUserId()+"' ORDER BY userId DESC");
 			while(rs.next()) {
-				bookings.add( new Booking(rs.getInt("bookId"), rs.getInt("roomId"), rs.getInt("userId"), rs.getTimestamp("startTime").toLocalDateTime(), rs.getTimestamp("endTime").toLocalDateTime(), rs.getInt("status") ) );
+				bookings.add( new Booking(rs.getInt("bookId"), rs.getInt("roomId"), rs.getInt("userId"), LocalDateTime.parse(rs.getString("startTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(rs.getString("endTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), rs.getInt("status") ) );
 			}
 		}
 		

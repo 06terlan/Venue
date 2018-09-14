@@ -56,12 +56,14 @@ public class Booking {
 	}
 
 	public String getStartTime() {
+		//System.out.println(startTime);
 		return startTime.format(format);
 	}
 	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 	public String getEndTime() {
+		//System.out.println(endTime);
 		return endTime.format(format);
 	}
 	public void setEndTime(LocalDateTime endTime) {
@@ -121,7 +123,6 @@ public class Booking {
 			sqlQuery = "Update bookings set userId='"+userId+"',roomId='"+roomId+"',`status`='"+status+"',startTime='"+startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))+"',endTime='"+endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))+"' WHERE bookId='"+bookingId+"'";
 			DBConnection connection = DBConnection.getInstance();
 			res = connection.update(sqlQuery);
-			System.out.println(sqlQuery);
 		}
 		else {	
 			sqlQuery = "insert into bookings(userId,roomId,startTime,endTime,status) values(\"" + userId + "\",\"" + roomId + "\",\"" + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",\"" + endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\",'"+status+"')";
