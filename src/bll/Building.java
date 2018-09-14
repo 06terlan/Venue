@@ -40,13 +40,13 @@ public class Building {
     }
 
     public void update() throws SQLException {
-        String updateQuery = "update buildings set buildingNumber=" + buildingNumber + " where buldingId=" + id;
+        String updateQuery = "update buildings set buildingNumber=" + buildingNumber + " where buildingId=" + id;
         DBConnection connection = DBConnection.getInstance();
         connection.update(updateQuery);
     }
 
     public void remove() throws SQLException {
-        String deleteQuery = "delete from buildings where buldingId=" + id;
+        String deleteQuery = "delete from buildings where buildingId=" + id;
         DBConnection connection = DBConnection.getInstance();
         connection.update(deleteQuery);
     }
@@ -59,7 +59,7 @@ public class Building {
     }
 
     public Building findById(int id) throws SQLException {
-        String sqlQuery = "select * from buildings where buldingId=" + id;
+        String sqlQuery = "select * from buildings where buildingId=" + id;
         DBConnection dbConnection = DBConnection.getInstance();
         ResultSet resultSet = dbConnection.executeQuery(sqlQuery);
         return resultSetToBuilding(resultSet);
@@ -67,7 +67,7 @@ public class Building {
 
     private Building resultSetToBuilding(ResultSet resultSet) throws SQLException {
         while(resultSet.next()) {
-            int id = resultSet.getInt("buldingId");
+            int id = resultSet.getInt("buildingId");
             String buildingNumber = resultSet.getString("buildingNumber");
             int zip = resultSet.getInt("zip");
             Address address = new Address();
@@ -83,7 +83,7 @@ public class Building {
     private List<Building> resultSetToBuildings(ResultSet resultSet) throws SQLException {
         List<Building> buildings = new ArrayList<>();
         while(resultSet.next()) {
-            int id = resultSet.getInt("buldingId");
+            int id = resultSet.getInt("buildingId");
             String buildingNumber = resultSet.getString("buildingNumber");
             int zip = resultSet.getInt("zip");
             Address address = new Address();
