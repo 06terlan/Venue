@@ -92,7 +92,7 @@ public class SignUpController {
 	    					
 	    					Parent root = (Parent) fxmlLoader.load();
 	    					
-	    					primaryStage.setTitle("Admin");
+	    					primaryStage.setTitle("Booking");
 		    		        primaryStage.setScene(new Scene(root, 600, 575));
 		    		        primaryStage.show(); 
 	    				} catch (IOException e) {
