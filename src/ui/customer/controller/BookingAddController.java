@@ -68,6 +68,7 @@ public class BookingAddController extends JFrame implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		try {
 			getRooms();
 		} catch (SQLException e) {
@@ -86,6 +87,7 @@ public class BookingAddController extends JFrame implements Initializable{
 					e.printStackTrace();
 				}
 		}
+				
 		initEvents();
 	}
 	

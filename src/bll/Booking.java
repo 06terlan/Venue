@@ -92,8 +92,6 @@ public class Booking {
 			while(rs.next()) {
 				RoomType roomType = RoomType.values()[(rs.getInt("roomType"))];
 				room = RoomFactory.createRoom(rs.getInt("roomId"), rs.getString("roomNo"), rs.getDouble("price"), roomType);
-//				if(rs.getString("roomType")=="concert") room = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
-				//else customer = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
 			}
 		}
 		
