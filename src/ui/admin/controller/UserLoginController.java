@@ -21,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.customer.controller.BookingController;
 
 public class UserLoginController {
     @FXML private TextField userName;
@@ -60,7 +61,27 @@ public class UserLoginController {
 	    		 }
 	    		 else
 	    		 {
-	    			 System.out.println("Redirect to Booking page");
+	    			// System.out.println("Redirect to Booking page");
+	    			 Stage primaryStage = (Stage) btnSignup.getScene().getWindow();
+	    				
+	    				//Parent root = null;
+	    				try {
+	    					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
+	    					BookingController controller = new BookingController();
+	    					controller.setCustomerId(user.getUserId());
+	    					
+	    					fxmlLoader.setController(controller);
+	    					
+	    					Parent root = (Parent) fxmlLoader.load();
+	    					
+	    					primaryStage.setTitle("Admin");
+		    		        primaryStage.setScene(new Scene(root, 600, 575));
+		    		        primaryStage.show(); 
+	    				} catch (IOException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
+	    		        
 	    		 }	    		 
 	    	 }
 	    	 else

@@ -15,6 +15,10 @@ public abstract class User {
 	private int userId;
 	private String userType;
 
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public User(String firstName, String lastName, String phoneNo, String userName, String password,
 			String street, String city, String state, int zip) {
 		Address address = new Address(zip,city,street,state);
@@ -111,6 +115,7 @@ public abstract class User {
 			if (resultSet.getString("type").equals("Admin")) {
 				user = new Admin();
 				addr = new Address();
+				user.setUserId(resultSet.getInt("userId"));
 				user.setFirstName(resultSet.getString("firstname"));
 				user.setFirstName(resultSet.getString("surname"));
 				user.setUserName(resultSet.getString("username"));
@@ -126,6 +131,7 @@ public abstract class User {
 				if (resultSet.getString("customerType").equals("Prime")) {
 					user = new PrimeCustomer();
 					addr = new Address();
+					user.setUserId(resultSet.getInt("userId"));
 					user.setFirstName(resultSet.getString("firstname"));
 					user.setFirstName(resultSet.getString("surname"));
 					user.setUserName(resultSet.getString("username"));
@@ -139,6 +145,7 @@ public abstract class User {
 				} else {
 					user = new NormalCustomer();
 					addr = new Address();
+					user.setUserId(resultSet.getInt("userId"));
 					user.setFirstName(resultSet.getString("firstname"));
 					user.setFirstName(resultSet.getString("surname"));
 					user.setUserName(resultSet.getString("username"));
