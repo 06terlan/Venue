@@ -2,8 +2,11 @@ package ui.admin.controller;
 
 import java.io.IOException;
 
+import bll.Admin;
 import bll.Customer;
 import bll.User;
+import bll.Rule.RuleException;
+import bll.Rule.RuleFactory;
 import bll.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,21 +32,45 @@ public class UserLoginController {
     
     @FXML protected void handleLoginAction(ActionEvent event) {
     	
-    	 boolean name = textFieldNotEmpty(userName, UserNameLabel, "User Name is required!");
-    	 boolean password = textFieldNotEmpty(passwordField, passwordLabel, "Password is required!");
-    	 incorrextUserandPassLabel.setText(null);
-    	 if(name && password) {    		
+    	bll.model.LoginUser lUser = new bll.model.LoginUser(userName.getText(), passwordField.getText());
+		try {
+			RuleFactory.getRule(UserLoginController.class).validate(lUser);			
+			incorrextUserandPassLabel.setText(null);
+    			
 	    	 UserService userService = new UserService();
 	    	 User user = userService.findByUserNamePassword(userName.getText(), passwordField.getText());
 	    	 if(user != null)
 	    	 {
-	    		 System.out.println("Redirect to Booking page");
+	    		
+	    		 if(user instanceof Admin)
+	    		 {
+	    			 //System.out.println("Redirect to Admin page"); 
+	    			 Stage primaryStage = (Stage) btnSignup.getScene().getWindow();
+	    				
+	    				Parent root = null;
+	    				try {
+	    					root = FXMLLoader.load(getClass().getResource("/ui/admin/fxml/admin_main.fxml"));
+	    				} catch (IOException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
+	    		        primaryStage.setTitle("Admin");
+	    		        primaryStage.setScene(new Scene(root, 600, 575));
+	    		        primaryStage.show();
+	    		 }
+	    		 else
+	    		 {
+	    			 System.out.println("Redirect to Booking page");
+	    		 }	    		 
 	    	 }
 	    	 else
 	    	 {	    		
 	    		 setErrorMessage(incorrextUserandPassLabel, "Incorrect user name and password.");
 	    	 }
-    	 }
+		} catch (RuleException e) {			
+			setErrorMessage(incorrextUserandPassLabel,e.getMessage());			
+		}
+		
       
     }
     @FXML protected void handleSignUpAction(ActionEvent event) { 

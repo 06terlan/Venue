@@ -7,16 +7,22 @@ public final class User {
     private final String PhoneNo;
     private final String UserName;
     private final String Password;
+    private final String ConfirmPassword;
 
-    public User(String firstName, String lastName, String phoneNo, String userName, String password) {
+    public User(String firstName, String lastName, String phoneNo, String userName, String password, String confirmPassword) {
         FirstName = firstName;
         LastName = lastName;
         PhoneNo = phoneNo;
         UserName = userName;
         Password = password;
+        ConfirmPassword = confirmPassword;
     }
 
-    public String getFirstName() {
+    public String getConfirmPassword() {
+		return ConfirmPassword;
+	}
+
+	public String getFirstName() {
         return FirstName;
     }
 
