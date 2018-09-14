@@ -64,18 +64,21 @@ public class AddVenueController implements Initializable {
     }
 
     @FXML
-    private void editBuilding(ActionEvent event) throws IOException {
-        String buildingNumber = buildingNumberTextField.getText().trim();
-        try {
-            this.venueService.editBuilding(building.getId(),buildingNumber);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void editBuilding(ActionEvent event) {
+        try{
+            String buildingNumber = buildingNumberTextField.getText().trim();
+            bll.model.Building building = new bll.model.Building(buildingNumber);
+            RuleFactory.getRule(AddVenueController.class).validate(building);
+            this.venueService.editBuilding(this.building.getId(),buildingNumber);
+            changeScene("/ui/venue/fxml/rooms.fxml",btnEdit);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            errorLabel.setText(e.getMessage());
         }
-        changeScene("/ui/venue/fxml/rooms.fxml",btnEdit);
     }
 
     @FXML
-    private void cancel(ActionEvent event) throws IOException {
+    private void cancel(ActionEvent event) {
         changeScene("/ui/venue/fxml/rooms.fxml",btnCancel);
     }
 
@@ -86,11 +89,15 @@ public class AddVenueController implements Initializable {
         RuleFactory.getRule(Address.class).validate(address);
     }
 
-    private void changeScene(String fxmlLocation,Node node) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
-        Scene scene = new Scene(loader.load());
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.setScene(scene);
+    private void changeScene(String fxmlLocation,Node node) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            errorLabel.setText("Something goes wrong! :-(");
+        }
     }
 
     public void setBuilding(Building building) {
