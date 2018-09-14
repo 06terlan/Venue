@@ -61,13 +61,13 @@ public class SignUpController {
 		    	{
 		    		
 		    		 customer = new PrimeCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
-		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "Prime");
+		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "prime");
 		        	    		  
 		    	}
 		    	else
 		    	{
 		    		 customer = new NormalCustomer(firstName.getText(), lastName.getText(), phoneNo.getText(), userName.getText(), password.getText(),
-		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "Normal");
+		        			street.getText(), city.getText(), state.getText(), Integer.parseInt(zip.getText()), "Customer", "normal");
 		        	      		
 		    	}    	
 		    	
