@@ -16,7 +16,7 @@ public class Customer extends Application {
         	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
             
         	BookingController controller = new BookingController();
-        	controller.setCustomerId(custId);
+        	BookingController.customerId = custId;
         	fxmlLoader.setController(controller);
         	
         	Parent root = (Parent)fxmlLoader.load(); 

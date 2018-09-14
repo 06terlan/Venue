@@ -68,8 +68,7 @@ public class UserLoginController {
 	    				try {
 	    					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
 	    					BookingController controller = new BookingController();
-	    					controller.setCustomerId(user.getUserId());
-	    					
+	    					BookingController.customerId = user.getUserId();
 	    					fxmlLoader.setController(controller);
 	    					
 	    					Parent root = (Parent) fxmlLoader.load();

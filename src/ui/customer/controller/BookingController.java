@@ -31,12 +31,9 @@ import javafx.stage.Stage;
 
 public class BookingController implements Initializable{
 	
-	private int customerId;
+	public static int customerId;
 	private Customer customer = null;
 	
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
 	
 	@FXML
 	private Button btnAdd;
@@ -213,11 +210,9 @@ public class BookingController implements Initializable{
 		if(customer == null) {
 			System.out.println(customerId);
 			DBConnection db = DBConnection.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM users LEFT JOIN addresses ON addresses.zip=users.zip WHERE userId='"+this.customerId+"'");
+			ResultSet rs = db.executeQuery("SELECT * FROM users LEFT JOIN addresses ON addresses.zip=users.zip WHERE userId='"+customerId+"'");
 			while(rs.next()) {
 				String c = rs.getString("customerType");
-				System.out.println("============================");
-				System.out.println(c);
 				CustomerType custType = CustomerFactory.getCustomerType(c);
 				customer = CustomerFactory.createCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"), customerId, custType);
 			}

@@ -34,7 +34,10 @@ public class PrimeCustomer extends Customer{
                 "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"" + this.getUserType() + "\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\",\"" + this.getCustomerType() + "\")";
         System.out.println(sqlQuery);
         DBConnection connection = DBConnection.getInstance();
-        return connection.update(sqlQuery);
+         int id = connection.update(sqlQuery);
+         System.out.println("-------------------------");
+         System.out.println(id);
+         return id;
     }	
 
 }

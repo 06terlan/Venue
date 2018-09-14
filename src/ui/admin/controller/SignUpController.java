@@ -86,8 +86,9 @@ public class SignUpController {
 	    				try {
 	    					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/customer/fxml/booking.fxml"));
 	    					BookingController controller = new BookingController();
-	    					controller.setCustomerId(custId);
-	    					
+//	    					controller.setCustomerId(custId);
+	    					BookingController.customerId = custId;
+	    					System.out.println(custId);
 	    					fxmlLoader.setController(controller);
 	    					
 	    					Parent root = (Parent) fxmlLoader.load();
