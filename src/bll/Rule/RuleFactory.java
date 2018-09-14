@@ -20,6 +20,7 @@ final public class RuleFactory {
 	static {
 		 map.put(SignUpController.class, new SignUpRule());
 		map.put(AddVenueController.class, new BuildingRule());
+		map.put(AddRoomController.class, new RoomRule());
 		map.put(Address.class,new AddressRule());
 		map.put(UserLoginController.class,new LoginUserRule());
 	}

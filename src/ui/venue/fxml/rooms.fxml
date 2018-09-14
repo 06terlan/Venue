@@ -28,5 +28,6 @@
       </Label>
       <Button fx:id="addNewBuilding" layoutX="373.0" layoutY="82.0" mnemonicParsing="false" onAction="#addNewBuilding" text="Add new Building" />
       <Button fx:id="addNewRoom" layoutX="912.0" layoutY="83.0" mnemonicParsing="false" onAction="#addNewRoom" text="Add new Room" />
+      <Button fx:id="btnBack" layoutX="978.0" layoutY="618.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

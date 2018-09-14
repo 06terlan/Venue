@@ -35,6 +35,7 @@ public class RoomsController implements Initializable {
 
     @FXML private Button addNewBuilding;
     @FXML private Button addNewRoom;
+    @FXML private Button btnBack;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -117,6 +118,11 @@ public class RoomsController implements Initializable {
     @FXML
     private void addNewRoom(ActionEvent event) throws IOException {
         changeScene("/ui/venue/fxml/addRoom.fxml",(Stage) addNewRoom.getScene().getWindow());
+    }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        changeScene("/ui/admin/fxml/admin_main.fxml",(Stage) btnBack.getScene().getWindow());
     }
 
     private void listAllBuildingRooms() {

@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -33,6 +34,7 @@ public class AddRoomController implements Initializable {
     @FXML private Button btnAddNewRoom;
     @FXML private Button btnEditRoom;
     @FXML private Button btnCancel;
+    @FXML private Label errorLabel;
 
     private ToggleGroup toggleGroup;
 
@@ -75,43 +77,53 @@ public class AddRoomController implements Initializable {
     }
 
     @FXML
-    private void addNewRoom(ActionEvent event) throws Exception {
-        validateFields();
+    private void addNewRoom(ActionEvent event) {
+        try {
+            validateFields();
+            addRoom();
+            changeScene("/ui/venue/fxml/rooms.fxml",btnAddNewRoom);
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
+    }
+
+    private void addRoom() throws Exception {
         String roomNumber = roomNumberTextField.getText().trim();
         double price = Double.parseDouble(priceTextField.getText().trim());
         this.venueService.addRoom(buildingId,roomNumber,roomType,price);
-        Stage stage = (Stage) btnAddNewRoom.getScene().getWindow();
-        changeScene("/ui/venue/fxml/rooms.fxml",stage);
     }
 
-    private void validateFields() {
-        try {
-            Building building = new Building(roomNumberTextField.getText());
-            RuleFactory.getRule(AddRoomController.class).validate(building);
-        } catch (RuleException e) {
+    private void validateFields() throws RuleException {
+        bll.model.Room room = new bll.model.Room(roomNumberTextField.getText(),roomType,priceTextField.getText());
+        RuleFactory.getRule(AddRoomController.class).validate(room);
+    }
 
+    @FXML
+    private void editRoom(ActionEvent event) {
+        try {
+            String roomNumber = roomNumberTextField.getText().trim();
+            double price =  Double.parseDouble(priceTextField.getText().trim());
+            this.venueService.editRoom(room.getRoomId(),roomNumber,price,roomType);
+            changeScene("/ui/venue/fxml/rooms.fxml",btnEditRoom);
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
+    }
+
+    private void changeScene(String fxmlLocation,Node node) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
+            Stage stage = (Stage) node.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        }catch (Exception e) {
+            errorLabel.setText("Something goes wrong! :-(");
         }
     }
 
     @FXML
-    private void editRoom(ActionEvent event) throws Exception {
-        String roomNumber = roomNumberTextField.getText().trim();
-        double price =  Double.parseDouble(priceTextField.getText().trim());
-        this.venueService.editRoom(room.getRoomId(),roomNumber,price,roomType);
-        Stage stage = (Stage) btnEditRoom.getScene().getWindow();
-        changeScene("/ui/venue/fxml/rooms.fxml",stage);
-    }
-
-    private void changeScene(String fxmlLocation,Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-    }
-
-    @FXML
-    private void cancel(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        changeScene("/ui/venue/fxml/rooms.fxml",stage);
+    private void cancel(ActionEvent event) {
+        changeScene("/ui/venue/fxml/rooms.fxml",btnCancel);
     }
 
     public RadioButton getMeetingRdBtn() {

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="466.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.venue.controller.AddRoomController">
+<AnchorPane prefHeight="511.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.venue.controller.AddRoomController">
    <children>
       <Label layoutX="190.0" layoutY="40.0" text="Add New Room">
          <font>
@@ -35,10 +35,15 @@
             <Image url="/files/conferenceRoom.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnAddNewRoom" layoutX="649.0" layoutY="423.0" mnemonicParsing="false" onAction="#addNewRoom" text="Add" />
-      <Button fx:id="btnEditRoom" visible="false" layoutX="649.0" layoutY="423.0" mnemonicParsing="false" onAction="#editRoom" text="Edit" />
-      <Button fx:id="btnCancel" layoutX="562.0" layoutY="423.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Button fx:id="btnAddNewRoom" layoutX="642.0" layoutY="456.0" mnemonicParsing="false" onAction="#addNewRoom" text="Add" />
+      <Button fx:id="btnEditRoom" layoutX="642.0" layoutY="456.0" mnemonicParsing="false" onAction="#editRoom" text="Edit" visible="false" />
+      <Button fx:id="btnCancel" layoutX="555.0" layoutY="456.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Label layoutX="97.0" layoutY="141.0" prefHeight="15.0" prefWidth="154.0" text="Price" />
       <TextField fx:id="priceTextField" layoutX="300.0" layoutY="144.0" />
+      <Label fx:id="errorLabel" layoutX="102.0" layoutY="400.0" prefHeight="25.0" prefWidth="523.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

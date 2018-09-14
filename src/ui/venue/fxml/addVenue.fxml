@@ -27,7 +27,7 @@
       <TextField fx:id="streetTextField" layoutX="282.0" layoutY="307.0" />
       <TextField fx:id="zipCodeTextField" layoutX="282.0" layoutY="351.0" />
       <Button fx:id="btnAdd" layoutX="409.0" layoutY="430.0" mnemonicParsing="false" onAction="#addNewBuilding" text="Add" />
-      <Button fx:id="btnEdit" layoutX="409.0" layoutY="399.0" mnemonicParsing="false" onAction="#editBuilding" text="Edit" visible="false" />
+      <Button fx:id="btnEdit" layoutX="409.0" layoutY="430.0" mnemonicParsing="false" onAction="#editBuilding" text="Edit" visible="false" />
       <Button fx:id="btnCancel" layoutX="325.0" layoutY="430.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Label fx:id="errorLabel" layoutX="84.0" layoutY="392.0" prefHeight="25.0" prefWidth="476.0" textFill="RED">
          <font>
