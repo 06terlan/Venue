@@ -11,9 +11,32 @@ public abstract class User {
 	private String	PhoneNo;
 	private Address Address;
 	private String UserName;
-	private String Password;	
-	private String UserType;
-
+	private String Password;
+	private int userId;
+	
+	public User(String firstName, String lastName, String phoneNo, String userName, String password,
+			String street, String city, String state, int zip) {
+		Address address = new Address(zip,city,street,state);
+		this.FirstName = firstName;
+		LastName = lastName;
+		PhoneNo = phoneNo;
+		Address = address;
+		UserName = userName;
+		Password = password;		
+	}
+	
+	public User(String firstName, String lastName, String phoneNo, String userName, String password,
+			String street, String city, String state, int zip, int userId) {
+		Address address = new Address(zip,city,street,state);
+		this.FirstName = firstName;
+		LastName = lastName;
+		PhoneNo = phoneNo;
+		Address = address;
+		UserName = userName;
+		Password = password;
+		this.userId = userId;
+	}
+	
 	public String getFirstName() {
 		return FirstName;
 	}
@@ -50,11 +73,9 @@ public abstract class User {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public String getUserType() {
-		return UserType;
-	}
-	public void setUserType(String userType) {
-		UserType = userType;
+
+	public int getUserId() {
+		return userId;
 	}
 	
 	public abstract int add() throws Exception;
