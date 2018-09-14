@@ -34,7 +34,7 @@ public class PrimeCustomer extends Customer{
 	@Override
     public int add() throws Exception {
         String sqlQuery = "insert into users(firstname,surname,type,username,password,phone,zip,customerType) " +
-                "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"" + this.getUserType() + "\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\",\"" + this.getCustomerType() + "\")";
+                "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"customer\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\",\"" + this.getCustomerType() + "\")";
         System.out.println(sqlQuery);
         DBConnection connection = DBConnection.getInstance();
          int id = connection.update(sqlQuery);
