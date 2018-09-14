@@ -16,7 +16,11 @@ public class PrimeCustomer extends Customer{
 		CustomerType = customerType;
 	}
 
-	public String getCustomerType() {
+    public PrimeCustomer() {
+        super();
+    }
+
+    public String getCustomerType() {
 		return CustomerType;
 	}
 

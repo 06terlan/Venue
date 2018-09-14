@@ -90,13 +90,10 @@ public class Booking {
 			DBConnection db = DBConnection.getInstance();
 			ResultSet rs = db.executeQuery("SELECT * FROM rooms WHERE roomId='"+this.roomId+"'");
 			while(rs.next()) {
-<<<<<<< HEAD
 				RoomType roomType = RoomType.values()[(rs.getInt("roomType"))];
 				room = RoomFactory.createRoom(rs.getInt("roomId"), rs.getString("roomNo"), rs.getDouble("price"), roomType);
-=======
 //				if(rs.getString("roomType")=="concert") room = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
 				//else customer = new NormalCustomer(rs.getString("firstname"), rs.getString("surname"), rs.getString("phone"), rs.getString("username"), rs.getString("password"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getInt("zip"), rs.getString("type"), rs.getString("customerType"));
->>>>>>> 6f00c4503330798c649e3518da83145facd90071
 			}
 		}
 		

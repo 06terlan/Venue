@@ -15,6 +15,11 @@ public class Admin extends User {
 		Address addr = new Address(zip, city, street, state);		
 		this.setAddress(addr);		
 	}
+
+    public Admin() {
+        super();
+    }
+
     public int add() throws Exception {
         String sqlQuery = "insert into users(firstname,surname,type,username,password,phone,zip) " +
                 "values(\"" + this.getFirstName() + "\",\"" + this.getLastName() + "\",\"" + this.getUserType() + "\",\"" + this.getUserName() + "\",\"" + this.getPassword() +"\",\"" + this.getPhoneNo() +"\",\"" + this.getAddress().getZip() + "\")";

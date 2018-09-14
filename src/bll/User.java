@@ -13,7 +13,8 @@ public abstract class User {
 	private String UserName;
 	private String Password;
 	private int userId;
-	
+	private String userType;
+
 	public User(String firstName, String lastName, String phoneNo, String userName, String password,
 			String street, String city, String state, int zip) {
 		Address address = new Address(zip,city,street,state);
@@ -36,7 +37,11 @@ public abstract class User {
 		Password = password;
 		this.userId = userId;
 	}
-	
+
+	public User() {
+
+	}
+
 	public String getFirstName() {
 		return FirstName;
 	}
@@ -96,63 +101,67 @@ public abstract class User {
         ResultSet resultSet = connection.executeQuery(sqlQuery);
         return resultSetToUser(resultSet);           
        
-    }	
-	 private static User resultSetToUser(ResultSet resultSet) throws SQLException {
-	        User user = null;
-	        Address addr = null;
-				        
-	        while (resultSet.next()) {
-	        	if(resultSet.getString("type").equals("Admin"))
-	        	{        		
-	        		user = new Admin();
-	        		addr = new Address();
-	        		user.setFirstName(resultSet.getString("firstname"));
-	        		user.setFirstName(resultSet.getString("surname"));
-	        		user.setUserName(resultSet.getString("username"));
-	                user.setUserType(resultSet.getString("type"));
-	                user.setPhoneNo(resultSet.getString("phone"));     
-	                addr.setCity(resultSet.getString("city"));
-	                addr.setState(resultSet.getString("state"));
-	                addr.setStreet(resultSet.getString("street"));
-	                addr.setZip(Integer.parseInt(resultSet.getString("zip")));
-	                user.setAddress(addr);
-	                
-	        	} 
-	        	else
-	        	{
-	        		if(resultSet.getString("customerType").equals("Prime")) {
-	        		 user = new PrimeCustomer(); 
-	        		 addr = new Address();
-	        		 user.setFirstName(resultSet.getString("firstname"));
-	          		 user.setFirstName(resultSet.getString("surname"));
-	          		 user.setUserName(resultSet.getString("username"));
-	                 user.setUserType(resultSet.getString("type"));
-	                 user.setPhoneNo(resultSet.getString("phone"));   
-	                 addr.setCity(resultSet.getString("city"));
-		                addr.setState(resultSet.getString("state"));
-		                addr.setStreet(resultSet.getString("street"));
-		                addr.setZip(Integer.parseInt(resultSet.getString("zip")));
-		                user.setAddress(addr);
-	        		}
-	        		else
-	        		{
-	        			user = new NormalCustomer(); 
-	        			addr = new Address();
-	           	    	 user.setFirstName(resultSet.getString("firstname"));
-	             		 user.setFirstName(resultSet.getString("surname"));
-	             		 user.setUserName(resultSet.getString("username"));
-	                    user.setUserType(resultSet.getString("type"));
-	                    user.setPhoneNo(resultSet.getString("phone")); 
-	                    addr.setCity(resultSet.getString("city"));
-		                addr.setState(resultSet.getString("state"));
-		                addr.setStreet(resultSet.getString("street"));
-		                addr.setZip(Integer.parseInt(resultSet.getString("zip")));
-		                user.setAddress(addr);
-	        			
-	        		}
-	        	}
-	        }    
-	        
-	        return user;
-	    }
+    }
+
+	private static User resultSetToUser(ResultSet resultSet) throws SQLException {
+		User user = null;
+		Address addr = null;
+
+		while (resultSet.next()) {
+			if (resultSet.getString("type").equals("Admin")) {
+				user = new Admin();
+				addr = new Address();
+				user.setFirstName(resultSet.getString("firstname"));
+				user.setFirstName(resultSet.getString("surname"));
+				user.setUserName(resultSet.getString("username"));
+				user.setUserType(resultSet.getString("type"));
+				user.setPhoneNo(resultSet.getString("phone"));
+				addr.setCity(resultSet.getString("city"));
+				addr.setState(resultSet.getString("state"));
+				addr.setStreet(resultSet.getString("street"));
+				addr.setZip(Integer.parseInt(resultSet.getString("zip")));
+				user.setAddress(addr);
+
+			} else {
+				if (resultSet.getString("customerType").equals("Prime")) {
+					user = new PrimeCustomer();
+					addr = new Address();
+					user.setFirstName(resultSet.getString("firstname"));
+					user.setFirstName(resultSet.getString("surname"));
+					user.setUserName(resultSet.getString("username"));
+					user.setUserType(resultSet.getString("type"));
+					user.setPhoneNo(resultSet.getString("phone"));
+					addr.setCity(resultSet.getString("city"));
+					addr.setState(resultSet.getString("state"));
+					addr.setStreet(resultSet.getString("street"));
+					addr.setZip(Integer.parseInt(resultSet.getString("zip")));
+					user.setAddress(addr);
+				} else {
+					user = new NormalCustomer();
+					addr = new Address();
+					user.setFirstName(resultSet.getString("firstname"));
+					user.setFirstName(resultSet.getString("surname"));
+					user.setUserName(resultSet.getString("username"));
+					user.setUserType(resultSet.getString("type"));
+					user.setPhoneNo(resultSet.getString("phone"));
+					addr.setCity(resultSet.getString("city"));
+					addr.setState(resultSet.getString("state"));
+					addr.setStreet(resultSet.getString("street"));
+					addr.setZip(Integer.parseInt(resultSet.getString("zip")));
+					user.setAddress(addr);
+
+				}
+			}
+		}
+
+		return user;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
 }

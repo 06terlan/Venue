@@ -14,7 +14,11 @@ public class Customer extends User {
 	private List<Booking> bookings = null;
 	protected String CustomerType;
 
-	public String getCustomerType() {
+    public Customer() {
+
+    }
+
+    public String getCustomerType() {
 		return CustomerType;
 	}
 

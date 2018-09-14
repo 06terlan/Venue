@@ -21,7 +21,11 @@ public class NormalCustomer extends Customer {
 		//CustomerType = customerType;
 	}
 
-	public String getCustomerType() {
+    public NormalCustomer() {
+        super();
+    }
+
+    public String getCustomerType() {
 		return CustomerType;
 	}
 
